@@ -6,7 +6,7 @@
 
 #define MAX_WORD_SIZE 50
 
-enum fails//список возможных возвращаемых значений ф-ции
+enum fails//СЃРїРёСЃРѕРє РІРѕР·РјРѕР¶РЅС‹С… РІРѕР·РІСЂР°С‰Р°РµРјС‹С… Р·РЅР°С‡РµРЅРёР№ С„-С†РёРё
 {
   OK, NOT_ENOUGH_MEMORY, EMPTY_STRING_ON_INPUT, MATCH_OF_KEY_NUMBERS
 };
@@ -37,7 +37,7 @@ enum fails AddElementToList(LST** list, int keyDigit, const char* word)
   if (word == NULL)
     return EMPTY_STRING_ON_INPUT;
 
-  //если список абсолютно пуст (создаем первый элемент и заполняем его)
+  //РµСЃР»Рё СЃРїРёСЃРѕРє Р°Р±СЃРѕР»СЋС‚РЅРѕ РїСѓСЃС‚ (СЃРѕР·РґР°РµРј РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ Рё Р·Р°РїРѕР»РЅСЏРµРј РµРіРѕ)
   if ((*list) == NULL)
   {
     (*list) = CreateElement(keyDigit, word);
@@ -45,14 +45,14 @@ enum fails AddElementToList(LST** list, int keyDigit, const char* word)
     if ((*list) == NULL)
       return NOT_ENOUGH_MEMORY;
 
-    (*list)->ptrToNext = (*list);//конечный элемент указывает на себя
+    (*list)->ptrToNext = (*list);//РєРѕРЅРµС‡РЅС‹Р№ СЌР»РµРјРµРЅС‚ СѓРєР°Р·С‹РІР°РµС‚ РЅР° СЃРµР±СЏ
     return 0;
   }
 
   LST* currentElement = (*list),
     * previousElement = (*list),
     * newElement;
-  //поиск места для нового элемента
+  //РїРѕРёСЃРє РјРµСЃС‚Р° РґР»СЏ РЅРѕРІРѕРіРѕ СЌР»РµРјРµРЅС‚Р°
   while (currentElement->ptrToNext != currentElement && currentElement->keyDigit < keyDigit)
   {
     previousElement = currentElement;
@@ -67,17 +67,17 @@ enum fails AddElementToList(LST** list, int keyDigit, const char* word)
   if (newElement == NULL)
     return NOT_ENOUGH_MEMORY;
 
-  //ключ нового элемента меньше чем у текущего, вставляем новый элемент перед текущим
+  //РєР»СЋС‡ РЅРѕРІРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РјРµРЅСЊС€Рµ С‡РµРј Сѓ С‚РµРєСѓС‰РµРіРѕ, РІСЃС‚Р°РІР»СЏРµРј РЅРѕРІС‹Р№ СЌР»РµРјРµРЅС‚ РїРµСЂРµРґ С‚РµРєСѓС‰РёРј
   if (currentElement->keyDigit > newElement->keyDigit)
   {
     newElement->ptrToNext = currentElement;
 
-    if (currentElement == (*list))//текущий элемент - начальный
+    if (currentElement == (*list))//С‚РµРєСѓС‰РёР№ СЌР»РµРјРµРЅС‚ - РЅР°С‡Р°Р»СЊРЅС‹Р№
       (*list) = newElement;
     else
       previousElement->ptrToNext = newElement;
   }
-  //вставляем новый элемент в конец, если его ключ самый большой
+  //РІСЃС‚Р°РІР»СЏРµРј РЅРѕРІС‹Р№ СЌР»РµРјРµРЅС‚ РІ РєРѕРЅРµС†, РµСЃР»Рё РµРіРѕ РєР»СЋС‡ СЃР°РјС‹Р№ Р±РѕР»СЊС€РѕР№
   else
   {
     newElement->ptrToNext = newElement;
@@ -129,11 +129,11 @@ int main()
 {
   LST* list = NULL;
   FILE* inputFile = NULL;
-  char inputFileName[261] = "D:\\folders\\Desktop\\123.txt",//путь к файлу с входными данными
+  char inputFileName[261] = "D:\\folders\\Desktop\\123.txt",//РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ СЃ РІС…РѕРґРЅС‹РјРё РґР°РЅРЅС‹РјРё
     word[MAX_WORD_SIZE + 1];
   int keyDigit = 0, err;
 
-  //Открываем файл
+  //РћС‚РєСЂС‹РІР°РµРј С„Р°Р№Р»
   fopen_s(&inputFile, inputFileName, "r");
   if (!inputFile)
   {
@@ -141,7 +141,7 @@ int main()
     return -1;
   }
 
-  //чтение из файла в список
+  //С‡С‚РµРЅРёРµ РёР· С„Р°Р№Р»Р° РІ СЃРїРёСЃРѕРє
   while (1)
   {
     if (fscanf_s(inputFile, "%s", word, MAX_WORD_SIZE) == EOF ||
@@ -150,7 +150,7 @@ int main()
 
     err = AddElementToList(&list, keyDigit, word);
 
-    //вывод ошибки на экран (если есть) и завершение программы
+    //РІС‹РІРѕРґ РѕС€РёР±РєРё РЅР° СЌРєСЂР°РЅ (РµСЃР»Рё РµСЃС‚СЊ) Рё Р·Р°РІРµСЂС€РµРЅРёРµ РїСЂРѕРіСЂР°РјРјС‹
     if (err)
     {
       switch (err)
