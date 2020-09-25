@@ -3,3 +3,22 @@
 ################################################################################
 
 *.ipch
+*.db
+*.ilk
+*.exe
+*.pdb
+*.tlog
+*.recipe
+*.obj
+*.idb
+*.log
+*.vcxproj
+*.filters
+*.user
+*.sln
+*.suo
+*.db-shm
+*.json
+*.sqlite
+*.db-wal
+*.opendb
